@@ -1,0 +1,10 @@
+/venv/
+/h2o/h2o-3.34.0.3/
+/h2o/h2o-3.34.0.3.zip
+
+/input/demograficos.xlsx
+/input/paraclinicos.xlsx
+/input/reportes_enfermeria_sv/
+
+/.idea/
+/_pycache_/
