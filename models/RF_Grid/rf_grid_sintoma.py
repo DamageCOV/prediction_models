@@ -1,5 +1,5 @@
 
-def rf_grid_sinto(file):
+def rf_grid_sinto(file, p):
     import h2o
 
     # import random forest
@@ -47,9 +47,12 @@ def rf_grid_sinto(file):
 
     h2o.init(nthreads=-1, max_mem_size=8)
     h2o.connect()
-
-    y = 'Ventilacion'
-    x = list(train_df.columns[2:21])
+    if p == 1:
+        y = 'Ventilacion'
+        x = list(train_df.columns[2:21])
+    elif p == 2:
+        y = 'Mortalidad'
+        x = list(train_df.columns[2:22])
 
     train = h2o.H2OFrame(train_df)
     train = train.asfactor()

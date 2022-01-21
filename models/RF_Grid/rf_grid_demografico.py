@@ -1,4 +1,4 @@
-def rf_grid_demo(file):
+def rf_grid_demo(file, p):
     import h2o
 
     # import random forest
@@ -46,9 +46,12 @@ def rf_grid_demo(file):
 
     h2o.init(nthreads=-1, max_mem_size=8)
     h2o.connect()
-
-    y = 'Ventilacion'
-    x = list(train_df.columns[2:52])
+    if p == 1:
+        y = 'Ventilacion'
+        x = list(train_df.columns[2:52])
+    elif p == 2:
+        y = 'Mortalidad'
+        x = list(train_df.columns[2:53])
 
     train = h2o.H2OFrame(train_df)
     train = train.asfactor()
@@ -88,6 +91,7 @@ def rf_grid_demo(file):
     print("Test performance")
     grid_rf_performance = best_drf_model.model_performance(test)
     print(grid_rf_performance)
+    print(best_drf_model.actual_params)
 
     # shutdown per every trained model
     h2o.cluster().shutdown()

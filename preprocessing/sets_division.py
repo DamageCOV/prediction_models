@@ -4,7 +4,7 @@ import os
 import pandas as pd
 
 
-def set_h2o(file, ratio_t, ratio_v, file_s, t, p ):
+def set_h2o(file, ratio_t, ratio_v, file_s, t, p):
     # p=1 es predecir ventilación
     # p=2 es predecir mortalidad con ventilación como variable
 
@@ -26,12 +26,19 @@ def set_h2o(file, ratio_t, ratio_v, file_s, t, p ):
     path = os.path.abspath(os.getcwd())
     df = pd.read_excel(path + '\\output\\data_models\\' + file)
     df = df.drop(df.columns[[0]], axis=1)
-    if t == 1 & p == 1:
+    if t == 1 and p == 1:
         df_m = df.iloc[:, np.r_[0:20, 50], ]
-    elif t == 2 & p == 1:
+    elif t == 2 and p == 1:
         df_m = df.iloc[:, np.r_[0:3, 20:51], ]
-    elif t == 3 & p == 1:
+    elif t == 3 and p == 1:
         df_m = df.iloc[:, np.r_[0:51], ]
+    elif t == 1 and p == 2:
+        df_m = df.iloc[:, np.r_[0:20, 50, 52], ]
+    elif t == 2 and p == 2:
+        df_m = df.iloc[:, np.r_[0:3, 20:51, 52], ]
+    elif t == 3 and p == 2:
+        df_m = df.iloc[:, np.r_[0:51, 52], ]
+
     df_m = h2o.H2OFrame(df_m)
     df_m = df_m.asfactor()
     splits = df_m.split_frame(ratios=[ratio_t, ratio_v], seed=1)
@@ -43,14 +50,25 @@ def set_h2o(file, ratio_t, ratio_v, file_s, t, p ):
     valid_df = h2o.as_list(valid)
     test_df = h2o.as_list(test)
     train_df = train_df.dropna()
-    print("Train")
-    print(train_df["Ventilacion"].value_counts())
-    print("")
-    print(("Valid"))
-    print(valid_df["Ventilacion"].value_counts())
-    print("")
-    print(("Test"))
-    print(test_df["Ventilacion"].value_counts())
+
+    if p == 1:
+        print("Train")
+        print(train_df["Ventilacion"].value_counts())
+        print("")
+        print(("Valid"))
+        print(valid_df["Ventilacion"].value_counts())
+        print("")
+        print(("Test"))
+        print(test_df["Ventilacion"].value_counts())
+    elif p == 2:
+        print("Train")
+        print(train_df["Mortalidad"].value_counts())
+        print("")
+        print(("Valid"))
+        print(valid_df["Mortalidad"].value_counts())
+        print("")
+        print(("Test"))
+        print(test_df["Mortalidad"].value_counts())
 
     train_df.to_excel(path + "\\output\\sets\\"+file_s+"_train.xlsx", sheet_name='sheet1')
     valid_df.to_excel(path + "\\output\\sets\\"+file_s+"_valid.xlsx", sheet_name='sheet1')

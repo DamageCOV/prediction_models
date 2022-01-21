@@ -1,4 +1,4 @@
-def rf_grid_comorbilidad(file):
+def rf_grid_comorbilidad(file, p):
     import h2o
 
     # import random forest
@@ -55,9 +55,12 @@ def rf_grid_comorbilidad(file):
 
     h2o.init(nthreads=-1, max_mem_size=8)
     h2o.connect()
-
-    y = 'Ventilacion'
-    x = list(train_df.columns[2:35])
+    if p == 1:
+        y = 'Ventilacion'
+        x = list(train_df.columns[2:35])
+    elif p == 2:
+        y = 'Mortalidad'
+        x = list(train_df.columns[2:36])
 
     train = h2o.H2OFrame(train_df)
     train = train.asfactor()
@@ -97,6 +100,7 @@ def rf_grid_comorbilidad(file):
     print("Test performance")
     grid_rf_performance = best_drf_model.model_performance(test)
     print(grid_rf_performance)
+
 
     # shutdown per every trained model
     h2o.cluster().shutdown()

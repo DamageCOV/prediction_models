@@ -18,11 +18,24 @@ from models.RF_Grid.rf_grid_demografico import rf_grid_demo
 
 # demo_preprocessing_pesos('demograficos_20_ene.xlsx' ,"demo_pesos_20_ene")
 # paraclinicos_preprocessing()
+
+# Con pesos y ventilación
+
 # set_h2o('demo_pesos_20_ene.xlsx', 0.70, 0.15, "demo_p_20_ene_sinto", 1, 1)
 # set_h2o('demo_pesos_20_ene.xlsx', 0.70, 0.15, "demo_p_20_ene_comor", 2, 1)
 # set_h2o('demo_pesos_20_ene.xlsx', 0.70, 0.15, "demo_p_20_ene", 3, 1)
-# rf_grid_sinto('demo_p_20_ene_sinto')
-rf_grid_comorbilidad('demo_p_20_ene_comor')
-# rf_grid_demo('demo_p_20_ene')
+# rf_grid_sinto('demo_p_20_ene_sinto', 1)
+# rf_grid_comorbilidad('demo_p_20_ene_comor', 1)
+# rf_grid_demo('demo_p_20_ene', 1)
+
+# Mortalidad
+
+# set_h2o('demo_pesos_20_ene.xlsx', 0.70, 0.15, "demo_p_20_ene_sinto_m", 1, 2)
+# set_h2o('demo_pesos_20_ene.xlsx', 0.70, 0.15, "demo_p_20_ene_comor_m", 2, 2)
+# set_h2o('demo_pesos_20_ene.xlsx', 0.70, 0.15, "demo_p_20_ene_m", 3, 2)
+
+# rf_grid_sinto('demo_p_20_ene_sinto_m', 2)
+# rf_grid_comorbilidad('demo_p_20_ene_comor_m', 2)
+rf_grid_demo('demo_p_20_ene_m', 2)
 
 
