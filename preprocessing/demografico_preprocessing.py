@@ -6,11 +6,10 @@ import os
 import pandas as pd
 
 
-def demo_preprocessing():
+def demo_preprocessing_pesos(file, file_n):
     # Abrir el archivo
-    # os.chdir("..")
     path = os.path.abspath(os.getcwd())
-    path_d = path + '\\input\\demograficos.xlsx'
+    path_d = path + '\\input\\'+file
 
     data = pd.read_excel(path_d)
 
@@ -71,10 +70,10 @@ def demo_preprocessing():
     df.loc[(df['Enfermedad hematologica cronica'] == 1), 'Enfermedad hematologica cronica'] = 2
     df.loc[(df['Enfermedad hepatica cronica'] == 1), 'Enfermedad hepatica cronica'] = 2
     df.loc[(df['Alcoholismo'] == 1), 'Alcoholismo'] = 2
-    df.loc[(df['Lupus eritematoso sistémico'] == 1), 'Lupus eritematoso sistémico'] = 3
+    df.loc[(df['Lupus eritematoso sistemico'] == 1), 'Lupus eritematoso sistemico'] = 3
 
     # Guardar nuevo archivo
-    path_out = path + "\\output\\data_models\\demografico_clean.xls"
+    path_out = path + "\\output\\data_models\\"+file_n+".xlsx"
     df.to_excel(path_out)
 
     # Imprimir estadísticas en consola
