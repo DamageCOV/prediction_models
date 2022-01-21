@@ -9,7 +9,9 @@
 """
 #Se importan los archivos con los diferentes modelos a procesar
 from preprocessing.demografico_preprocessing import demo_preprocessing
+from preprocessing.paraclinicos_preprocessing import paraclinicos_preprocessing
 
 
-demo_preprocessing()
+#demo_preprocessing()
+paraclinicos_preprocessing()
 
